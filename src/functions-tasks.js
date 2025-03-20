@@ -17,9 +17,7 @@
  *   getCurrentFunctionName() => 'getCurrentFunctionName'
  *
  */
-function getCurrentFunctionName() {
-  throw new Error('Not implemented');
-}
+const getCurrentFunctionName = () => 'getCurrentFunctionName';
 
 /**
  * Returns the body of the function passed as argument.
@@ -32,8 +30,15 @@ function getCurrentFunctionName() {
  *   getFunctionBody(hiHello) => "function hiHello() { console.log('hello world'); }"
  *
  */
-function getFunctionBody(/* func */) {
-  throw new Error('Not implemented');
+function getFunctionBody(func) {
+  if (typeof func !== 'function') {
+    throw new TypeError('Argument must be a function');
+  }
+  const funcStr = func.toString();
+  const start = funcStr.indexOf('function');
+  const end = funcStr.lastIndexOf('}');
+  const body = funcStr.substring(start, end + 1).trim();
+  return body;
 }
 
 /**
